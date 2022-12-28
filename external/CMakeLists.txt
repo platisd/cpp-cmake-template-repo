@@ -13,7 +13,7 @@ endif ()
 
 # Add googletest directly to our build. This defines
 # the gtest and gtest_main targets.
-set(gtest_release_version "1.10.0")
+set(gtest_release_version "1.12.1")
 add_subdirectory(googletest-release-${gtest_release_version} EXCLUDE_FROM_ALL)
 
 # The gtest/gtest_main targets carry header search path
@@ -25,11 +25,8 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
 endif ()
 
 # GTest and GMock do not play nicely with these flags, so disable them
-target_compile_options(gtest PRIVATE
-        -Wno-ctor-dtor-privacy
-        -Wno-missing-include-dirs
-        -Wno-sign-promo)
-target_compile_options(gmock PRIVATE -Wno-pedantic)
+target_compile_options(gtest PRIVATE -Wno-ctor-dtor-privacy)
+target_compile_options(gmock PRIVATE -Wno-ctor-dtor-privacy)
 
 function(configure_test testExecutable)
     # Link against gtest library
