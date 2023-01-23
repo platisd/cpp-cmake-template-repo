@@ -1,5 +1,13 @@
 ### GoogleTest
 # Adopted from https://github.com/google/googletest/blob/master/googletest/README.md
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  # Specify the commit you depend on and update it regularly.
+  URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
+)
+FetchContent_MakeAvailable(googletest)
+
 # Prevent overriding the parent project's compiler/linker
 # settings on Windows
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -9,19 +17,6 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "CYGWIN")
     add_definitions(-DTEST_HAS_PTHREAD=0)
     set(gtest_disable_pthreads ON)
-endif ()
-
-# Add googletest directly to our build. This defines
-# the gtest and gtest_main targets.
-set(gtest_release_version "1.12.1")
-add_subdirectory(googletest-release-${gtest_release_version} EXCLUDE_FROM_ALL)
-
-# The gtest/gtest_main targets carry header search path
-# dependencies automatically when using CMake 2.8.11 or
-# later. Otherwise we have to add them here ourselves.
-if (CMAKE_VERSION VERSION_LESS 2.8.11)
-    include_directories("${gtest_SOURCE_DIR}/include"
-            "${gmock_SOURCE_DIR}/include")
 endif ()
 
 # GTest and GMock do not play nicely with these flags, so disable them
