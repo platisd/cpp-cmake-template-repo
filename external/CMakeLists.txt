@@ -20,7 +20,7 @@ if ("${CMAKE_SYSTEM_NAME}" STREQUAL "CYGWIN")
 endif ()
 
 # GTest and GMock do not play nicely with these flags, so disable them
-target_compile_options(gtest PRIVATE -Wno-ctor-dtor-privacy)
+target_compile_options(gtest PRIVATE -Wno-ctor-dtor-privacy -Wno-conversion)
 target_compile_options(gmock PRIVATE -Wno-ctor-dtor-privacy)
 
 function(configure_test testExecutable)
